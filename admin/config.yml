@@ -1,23 +1,20 @@
 backend:
   name: github
-  repo: hecarimday/hecarimday.github.io # 예: hecarimday/hecarimday.github.io
-  branch: main # 혹은 master
-  stide_id: "05fba26d-e0c1-4cf6-b175-354d90f7d367"
+  repo: hecarimday/hecarimday.github.io
+  branch: main
+  # [핵심] 네트리파이 주소를 베이스로 잡아야 팝업창이 안 터집니다.
+  base_url: https://sweet-genie-b1cd1b.netlify.app
+  # [핵심] 아까 복사한 API ID를 여기에 한 번 더 박아줍니다.
+  site_id: 05fba26d-e0c1-4cf6-b175-354d90f7d367
 
-media_folder: "assets/img" # 사진이 저장될 경로
-public_folder: "/assets/img" # 웹사이트에서 사진을 불러올 경로
-
+# 이하 게시판 설정 (기존 것 유지)
 collections:
-  - name: "notice" # 컬렉션 이름
-    label: "Notice" # 화면에 표시될 이름
-    folder: "_posts" # 글이 저장되는 폴더
-    create: true # 새 글 쓰기 허용 여부
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # 파일명 규칙
-    fields: # 글쓰기 창에 나타날 입력칸들
-      - { label: "Layout", name: "layout", widget: "hidden", default: "post" }
-      - { label: "Title", name: "title", widget: "string" } 
-      - { label: "Author", name: "author", widget: "string", default: "Admin" }
-      - { label: "Category", name: "category", widget: "hidden", default: "notice" }
-      - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Featured Image", name: "image", widget: "image", required: false }
+  - name: "notice"
+    label: "Notice"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
       - { label: "Body", name: "body", widget: "markdown" }

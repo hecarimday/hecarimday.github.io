@@ -3,22 +3,19 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NLP Lab Content Manager</title>
+  <title>Content Manager</title>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-
   <script>
     if (window.netlifyIdentity) {
-      // 위젯을 초기화할 때, 내 네트리파이 서버 주소를 직접 알려줍니다.
-      window.netlifyIdentity.init({
-        url: "https://sweet-genie-b1cd1b.netlify.app" 
-      });
-
-      // 로그인 성공 시 관리자 페이지 새로고침
-      window.netlifyIdentity.on("login", () => {
-        document.location.href = "/admin/";
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
       });
     }
   </script>
