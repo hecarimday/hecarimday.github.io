@@ -1,6 +1,6 @@
 # 1. 백엔드 설정 (인증 관련)
 backend:
-  name: github
+  name: git-gateway
   repo: hecarimday/hecarimday.github.io
   branch: main
   base_url: https://sweet-genie-b1cd1b.netlify.app
