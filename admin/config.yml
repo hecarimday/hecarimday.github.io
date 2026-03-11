@@ -1,13 +1,17 @@
+# 1. 백엔드 설정 (인증 관련)
 backend:
   name: github
   repo: hecarimday/hecarimday.github.io
   branch: main
-  # [핵심] 네트리파이 주소를 베이스로 잡아야 팝업창이 안 터집니다.
   base_url: https://sweet-genie-b1cd1b.netlify.app
-  # [핵심] 아까 복사한 API ID를 여기에 한 번 더 박아줍니다.
   site_id: 05fba26d-e0c1-4cf6-b175-354d90f7d367
 
-# 이하 게시판 설정 (기존 것 유지)
+# 2. 미디어 설정 (에러의 원인이었던 필수값들!)
+# 글 쓸 때 업로드하는 사진들이 저장될 경로입니다.
+media_folder: "assets/images/posts"
+public_folder: "/assets/images/posts"
+
+# 3. 게시판(Notice) 설정
 collections:
   - name: "notice"
     label: "Notice"
