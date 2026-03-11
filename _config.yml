@@ -2,7 +2,7 @@ title: NLPLAB
 description: SKK Univ. NLP LAB.
 
 url: "https://hecarimday.github.io"
-baseurl: "/NLPlab-skku-test.github.io"
+baseurl: ""
 paginate_path: "blog/page:num/"
 permalink: blog/:title/
 
