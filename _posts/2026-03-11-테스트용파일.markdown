@@ -18,3 +18,10 @@ category: notice
 통신보안 지원2중대 PX관리병 상병 박진석입니다
 
 통신보안 주파령 레이더 병장 박진석입니다
+
+C:\Users\user\Desktop\NLPlab-skku-test.github.io-main\assets\img\members\current\park_jin_seok.png
+
+<figure>
+	<img src="{{ '/assets/img/members/current/park_jin_seok.png' | prepend: site.baseurl }}" alt=""> 
+	<figcaption>테스트용 파일입니다</figcaption>
+</figure>
