@@ -6,20 +6,68 @@ title: notice
 <div class="board-search" style="display: flex; gap: 5px; justify-content: flex-end; margin-bottom: 20px;">
   <select id="search-category" style="padding: 5px;">
     <option value="전체">전체</option>
-    <option value="공지">공지</option>
+    <option value="notice">공지</option>
     <option value="채용">채용</option>
   </select>
   <input type="text" id="search-input" placeholder="검색어를 입력하세요" style="padding: 5px; width: 200px;">
   <button onclick="executeSearch()" style="padding: 5px 15px; background: #004ea2; color: white; border: none; cursor: pointer;">검색</button>
 </div>
 
+<div class="post">
+  <h1 class="pageTitle">Notice</h1>   
+  <p class="meta">연구실 주요 소식</p>
+</div>
+
+<div class="skku-board-list">
+  <ul class="post-list" style="list-style: none; padding: 0;">
+    {% comment %} 
+      페이징이 활성화되어 있으면 paginator.posts를 쓰고, 
+      아니면 전체 posts 중 category가 notice인 것만 가져옵니다. 
+    {% endcomment %}
+    {% if paginator.posts %}
+      {% assign posts_to_show = paginator.posts %}
+    {% else %}
+      {% assign posts_to_show = site.posts | where: "category", "notice" %}
+    {% endif %}
+
+    {% for post in posts_to_show %}
+      <li style="display: flex; justify-content: space-between; padding: 20px 10px; border-bottom: 1px solid #eee;">
+        <div style="flex: 1;">
+          <a href="{{ post.url | relative_url }}" style="text-decoration: none; color: #333; font-weight: 500; font-size: 1.1em;">
+            [{{ post.category | default: "공지" }}] {{ post.title }}
+          </a>
+          {% if post.date | date: "%Y-%m-%d" == site.time | date: "%Y-%m-%d" %}
+            <span style="color: #ff6600; font-weight: bold; margin-left: 8px;">N</span>
+          {% endif %}
+        </div>
+        <span style="color: #888; font-size: 0.9em;">{{ post.date | date: "%Y-%m-%d" }}</span>
+      </li>
+    {% else %}
+      <li style="text-align: center; padding: 50px; color: #999;">등록된 게시물이 없습니다.</li>
+    {% endfor %}
+  </ul>
+
+  {% if paginator.total_pages > 1 %}
+  <div class="pagination" style="text-align: center; margin-top: 30px;">
+    {% if paginator.previous_page %}
+      <a href="{{ paginator.previous_page_path | relative_url }}">이전</a>
+    {% endif %}
+    <span style="margin: 0 15px;">{{ paginator.page }} / {{ paginator.total_pages }}</span>
+    {% if paginator.next_page %}
+      <a href="{{ paginator.next_page_path | relative_url }}">다음</a>
+    {% endif %}
+  </div>
+  {% endif %}
+</div>
+
 <script>
 let posts = [];
 
-// 데이터 로드
+// 데이터 로드 (search.json 위치 확인 필수)
 fetch('{{ "/search.json" | relative_url }}')
   .then(res => res.json())
-  .then(data => posts = data);
+  .then(data => { posts = data; })
+  .catch(err => console.error("데이터를 불러오지 못했습니다. search.json 위치를 확인하세요."));
 
 function executeSearch() {
   const category = document.getElementById('search-category').value;
@@ -27,108 +75,23 @@ function executeSearch() {
   const listContainer = document.querySelector('.post-list');
   const pagination = document.querySelector('.pagination');
 
-  // 필터링
   const results = posts.filter(p => {
     const categoryMatch = (category === "전체" || p.category === category);
     const keywordMatch = p.title.toLowerCase().includes(keyword);
     return categoryMatch && keywordMatch;
   });
 
-  // 검색 시 페이지네이션 숨김 (검색 결과만 보여주기 위함)
-  pagination.style.display = 'none';
+  if (pagination) pagination.style.display = 'none';
 
-  // 결과 출력
   if (results.length === 0) {
-    listContainer.innerHTML = '<li style="text-align:center; padding:50px;">검색 결과가 없습니다.</li>';
+    listContainer.innerHTML = '<li style="text-align:center; padding:50px; color:#999;">검색 결과가 없습니다.</li>';
   } else {
     listContainer.innerHTML = results.map(p => `
-      <li style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee;">
-        <a href="${p.url}">[${p.category}] ${p.title}</a>
-        <span>${p.date}</span>
+      <li style="display: flex; justify-content: space-between; padding: 20px 10px; border-bottom: 1px solid #eee;">
+        <a href="${p.url}" style="text-decoration:none; color:#333; font-weight:500;">[${p.category}] ${p.title}</a>
+        <span style="color:#888;">${p.date}</span>
       </li>
     `).join('');
   }
 }
 </script>
-
-<style>
-    /* 성균관대 공지사항 느낌의 리스트 스타일 */
-    .board-table { width: 100%; border-top: 2px solid #333; border-collapse: collapse; margin-top: 20px; }
-    .board-table th, .board-table td { border-bottom: 1px solid #ddd; padding: 15px 10px; text-align: center; }
-    .board-table .title-cell { text-align: left; }
-    .board-table a { text-decoration: none; color: #333; font-weight: bold; }
-    .board-table a:hover { color: #004594; } /* 성대 상징색 느낌 */
-    .new-badge { color: #ff6600; font-size: 0.8em; font-weight: bold; margin-left: 5px; }
-</style>
-
-
-<!-- <h4>Boards</h4>
-<div class="linklink" style="background-color:#ffffff; border-radius:0 15px">
-    <ul class="posts-list">
-        <li>Notice(here)</li>
-        <li class="post-link">
-            <a class="post-title" href="{{ '/Boards/paper.html' | prepend: site.baseurl }}">Paper</a>
-        </li>
-        <li class="post-link">
-            <a class="post-title" href="{{ '/Boards/link.html' | prepend: site.baseurl }}">Link</a>
-        </li>
-    </ul>
-</div> -->
-
-<div class="post">
-    <h1 class="pageTitle">Notice</h1>   
-    <p class="meta">연구실 주요 소식</p>
-</div>
-
-<style>
-    .skku-board-list { border-top: 2px solid #333; margin-top: 20px; }
-    .skku-item { 
-        display: flex; 
-        justify-content: space-between; 
-        align-items: center; 
-        padding: 20px 10px; 
-        border-bottom: 1px solid #eee; 
-        text-decoration: none; 
-        color: #333;
-    }
-    .skku-item:hover { background-color: #fcfcfc; }
-    
-    .skku-content { flex: 1; }
-    .skku-title { font-size: 1.1em; font-weight: 500; margin-bottom: 8px; display: block; }
-    .skku-meta { font-size: 0.85em; color: #888; display: flex; align-items: center; }
-    .skku-meta span { margin-right: 10px; }
-    .skku-meta .divider { margin-right: 10px; color: #ddd; }
-
-    .skku-right { display: flex; align-items: center; }
-    .new-tag { color: #ff6600; font-weight: bold; font-size: 0.8em; margin-right: 20px; }
-    .download-box { 
-        width: 35px; height: 35px; 
-        border: 1px solid #ddd; 
-        display: flex; justify-content: center; align-items: center;
-        color: #888; font-size: 1.2em;
-    }
-</style>
-
-<div class="skku-board-list">
-    {% assign notice_posts = site.posts | where: "category", "notice" %}
-    <ul class="post-list">
-    {% for post in paginator.posts %}
-        <li style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee;">
-            <a href="{{ post.url | relative_url }}">[{{ post.category | default: "공지" }}] {{ post.title }}</a>
-            <span>{{ post.date | date: "%Y-%m-%d" }}</span>
-        </li>
-    {% endfor %}
-    </ul>
-
-    <div class="pagination" style="text-align: center; margin-top: 30px;">
-        {% if paginator.previous_page %}
-            <a href="{{ paginator.previous_page_path | relative_url }}">이전</a>
-        {% endif %}
-        
-        <span style="margin: 0 15px;">{{ paginator.page }} / {{ paginator.total_pages }}</span>
-
-        {% if paginator.next_page %}
-            <a href="{{ paginator.next_page_path | relative_url }}">다음</a>
-        {% endif %}
-    </div>
-</div>
