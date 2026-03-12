@@ -1,63 +1,50 @@
 title: NLPLAB
 description: SKK Univ. NLP LAB.
-
 url: "https://hecarimday.github.io"
 baseurl: ""
-paginate_path: "blog/page:num/"
-permalink: blog/:title/
+
+# [수정] 중복된 paginate_path와 paginate를 하나로 정리합니다.
+# 지킬 기본 페이징(v1)은 사이트 내 '딱 한 곳'만 타겟팅할 수 있습니다.
+paginate: 10
+paginate_path: "/notice/page:num/"
 
 markdown: kramdown
 highlighter: rouge
-gems: [jekyll-paginate]
-paginate: 5
 
-navigation:
- - title: Home
-   url: /index.html
- - title: About Us
-   url: /AboutUs/Introduction/
- - title: Research
-   url: /Research/Fields/
- - title: Publications
-   url: /Publications/JournalPapers/
- - title: Members
-   url: /Members/
- - title: Demos
-   url: /Demos/Natural_Language_Processing/
-#  - title: GitHub
-#    url: "https://github.com/NLPlab-skku"
-#  - title: LinkedIn
-#    url: "https://www.linkedin.com/company/skku-nlplab/posts/?feedView=all"
-#  - title: Apply
-#    url: "https://forms.gle/bdW4K2uYqvteRWfX7"
-# 일단 테스트 하기 좋게 각 섹션들을 모두 추가 
- - title: Boards
-   url: /Boards/notice/
- #- title: Papers
- #  url: /Boards/paper/
- - title: Links
-   url: /Boards/link/
- #- title: Courses
- #  url: /Courses/openingcourses 
- #- title: Software
- #  url: /Software/languageanalysissoftware/ --> 
-
-social:
-   github: "https://github.com/NLPlab-skku"
-   linkedin: "https://www.linkedin.com/company/skku-nlplab/posts/?feedView=all"  # <--- 이 줄을 추가!
-   apply: "https://forms.gle/bdW4K2uYqvteRWfX7"
-   #twitter: brianmaierjr
-   #facebook: brianmaierjr
-   email: nlplab.skku@gmail.com
-
-google_analytics: "UA-58263416-1"
-
-# 1. 페이징 플러그인 활성화 (GitHub Pages 기본 지원)
+# [수정] gems 대신 최신 규격인 plugins 하나만 사용하세요.
 plugins:
   - jekyll-paginate
 
-# 2. 한 페이지당 게시물 개수 설정
-paginate: 10
+navigation:
+  - title: Home
+    url: /index.html
+  - title: About Us
+    url: /AboutUs/Introduction/
+  - title: Research
+    url: /Research/Fields/
+  - title: Publications
+    url: /Publications/JournalPapers/
+  - title: Members
+    url: /Members/
+  - title: Demos
+    url: /Demos/Natural_Language_Processing/
+  - title: Boards
+    url: /Boards/notice/
+  - title: Links
+    url: /Boards/link/
 
-# 3. 다음 페이지들의 주소 규칙 (예: /notice/page2, /notice/page3 ...)
-paginate_path: "/notice/page:num/"
+social:
+  github: "https://github.com/NLPlab-skku"
+  linkedin: "https://www.linkedin.com/company/skku-nlplab/posts/?feedView=all"
+  apply: "https://forms.gle/bdW4K2uYqvteRWfX7"
+  email: nlplab.skku@gmail.com
+
+google_analytics: "UA-58263416-1"
+
+# 빌드 시 불필요한 파일 제외 (속도 향상)
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .jekyll-cache
