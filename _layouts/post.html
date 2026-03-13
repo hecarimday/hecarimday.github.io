@@ -1,6 +1,19 @@
 ---
 layout: default
 ---
+
+<style>
+  /* 첨부파일 개별 아이템 스타일 */
+  .attachment-item {
+    margin-bottom: 8px;
+  }
+
+  /* 마지막 아이템은 마진을 0으로 (에디터가 좋아하는 방식) */
+  .attachment-item:last-child {
+    margin-bottom: 0 !important;
+  }
+</style>
+
 <div class="post">
   <div class="post-header-container" style="border-top: 2px solid #333; border-bottom: 1px solid #ddd; padding: 20px 0; margin-bottom: 30px; background-color: #fcfcfc;">
     <div style="padding: 0 20px;">
@@ -21,43 +34,20 @@ layout: default
   
   <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
 
-  {% if page.attachments %}
-  <div class="attachment-container" style="padding: 15px 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; margin: 25px 0;">
-    {% for file in page.attachments %}
-      {% comment %} 파일 확장자 추출 로직 {% endcomment %}
-      {% assign file_ext = file.path | split: '.' | last | downcase %}
-      
-      {% comment %} 확장자별 아이콘 매칭 {% endcomment %}
-      {% if file_ext == "pdf" %}
-        {% assign icon_url = "https://img.icons8.com/color/48/pdf-2.png" %}
-      {% elsif file_ext == "doc" or file_ext == "docx" %}
-        {% assign icon_url = "https://img.icons8.com/color/48/microsoft-word-2019.png" %}
-      {% elsif file_ext == "xls" or file_ext == "xlsx" %}
-        {% assign icon_url = "https://img.icons8.com/color/48/microsoft-excel-2019.png" %}
-      {% elsif file_ext == "ppt" or file_ext == "pptx" %}
-        {% assign icon_url = "https://img.icons8.com/color/48/microsoft-powerpoint-2019.png" %}
-      {% else %}
-        {% assign icon_url = "https://img.icons8.com/color/48/file.png" %}
-      {% endif %}
-
-      <<div style="{% unless forloop.last %}margin-bottom: 8px;{% endunless %}">
-        <a href="{{ file.path | relative_url }}" download="{{ file.name }}" 
-          style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: #444;">
-          
-          <img src="{{ icon_url }}" alt="{{ file_ext }}-icon" style="width: 18px; height: 18px; flex-shrink: 0;">
-          
-          <span style="font-size: 0.95rem; font-weight: 500; border-bottom: 1px solid transparent; transition: 0.2s;" 
-                onmouseover="this.style.color='#004594'; this.style.borderBottomColor='#004594';" 
-                onmouseout="this.style.color='#444'; this.style.borderBottomColor='transparent';">
-            {{ file.name }}
-          </span>
-
-          <span style="font-size: 0.8rem; color: #004594; font-weight: bold; opacity: 0.6; letter-spacing: 0.5px;">[DOWNLOAD]</span>
-        </a>
-      </div>
-    {% endfor %}
-  </div>
-  {% endif %}
+  {% for file in page.attachments %}
+    <div class="attachment-item"> <a href="{{ file.path | relative_url }}" download="{{ file.name }}" 
+        style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: #444;">
+        
+        <img src="{{ icon_url }}" style="width: 18px; height: 18px;">
+        
+        <span style="font-size: 0.95rem; font-weight: 500;">
+          {{ file.name }}
+        </span>
+        
+        <span style="font-size: 0.8rem; color: #004594; font-weight: bold; opacity: 0.6;">[DOWNLOAD]</span>
+      </a>
+    </div>
+  {% endfor %}
 
 
 
