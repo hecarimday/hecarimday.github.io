@@ -35,7 +35,9 @@ permalink: /Boards/
       </div>
       
       <div class="item-meta" style="font-size: 0.9em; color: #888; display: flex; gap: 15px;">
-        <span>No.{{ forloop.rindex }}</span> <span style="color: #ddd;">|</span>
+        {% assign offset = paginator.page | minus: 1 | times: paginator.per_page %}
+        {% assign post_no = paginator.total_posts | minus: offset | minus: forloop.index0 %}
+        <span>No.{{ post_no }}</span>
         <span>{{ post.author | default: "연구실" }}</span>
         <span style="color: #ddd;">|</span>
         <span>{{ post.date | date: "%Y-%m-%d" }}</span>
