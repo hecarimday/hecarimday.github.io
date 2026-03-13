@@ -18,7 +18,23 @@ layout: default
       </div>
     </div>
   </div>
+  
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
 
+  {% if page.attachments %}
+  <div class="attachment-section" style="padding: 15px 0; border-bottom: 1px solid #eee; margin-bottom: 20px;">
+    {% for file in page.attachments %}
+    <div class="attachment-item" style="display: flex; align-items: center; gap: 10px;">
+      <img src="https://img.icons8.com/color/24/000000/microsoft-word-2019.png" alt="file-icon" style="width: 20px; height: 20px;">
+      
+      <a href="{{ file.path | relative_url }}" download="{{ file.name }}" style="text-decoration: none; color: #333; font-size: 1.1em;">
+        {{ file.name }}
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  
   <div class="post-content" style="padding: 0 20px; line-height: 1.8;">
     {{ content }}
   </div>

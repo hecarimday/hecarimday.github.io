@@ -5,6 +5,10 @@ date:   2025-11-11
 description: .
 author: "박진석"
 category: 공지
+
+attachments:
+  - name: "학석사연계과정_신청_매뉴얼(학생용)"
+    path: "/assets/board/2026/files/학석사연계과정_신청_매뉴얼(학생용).pdf"
 ---
 
 대충 파일 올리기 테스트라는 글
