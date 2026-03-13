@@ -9,13 +9,21 @@ title: notice
 </div>
 
 <div class="search-form-container" style="display: flex; gap: 5px; justify-content: flex-end; margin-bottom: 30px;">
-  <select id="search-category" style="height: 40px; padding: 0 10px; border: 1px solid #ddd; vertical-align: middle;">
+  <select id="search-category" style="height: 40px; padding: 0 10px; border: 1px solid #ddd;">
     <option value="전체">전체</option>
     <option value="공지">공지</option>
     <option value="채용">채용</option>
   </select>
-  <input type="text" id="search-input" style="height: 40px; padding: 0 12px; border: 1px solid #ddd; width: 250px; vertical-align: middle;">
-  <button onclick="executeSearch()" style="height: 40px; padding: 0 25px; background: #004594; color: white; border: none; cursor: pointer; font-weight: bold; vertical-align: middle;">검색</button>
+  
+  <select id="search-target" style="height: 40px; padding: 0 10px; border: 1px solid #ddd;">
+    <option value="전체">전체</option>
+    <option value="제목">제목</option>
+    <option value="내용">내용</option>
+    <option value="작성자">작성자</option>
+  </select>
+
+  <input type="text" id="search-input" placeholder="검색어를 입력하세요" style="height: 40px; padding: 0 12px; border: 1px solid #ddd; width: 250px;">
+  <button onclick="executeSearch()" style="height: 40px; padding: 0 25px; background: #004594; color: white; border: none; cursor: pointer; font-weight: bold;">검색</button>
 </div>
 
 <div class="skku-board">
@@ -74,3 +82,59 @@ title: notice
   </div>
   {% endif %}
 </div>
+<script>
+async function executeSearch() {
+  const category = document.getElementById('search-category').value;
+  const target = document.getElementById('search-target').value;
+  const keyword = document.getElementById('search-input').value.toLowerCase();
+  const boardList = document.querySelector('.post-list');
+  const pagination = document.querySelector('.pagination');
+
+  // 1. 데이터 가져오기
+  const response = await fetch('{{ "/search.json" | relative_url }}');
+  const posts = await response.json();
+
+  // 2. 필터링 로직
+  const results = posts.filter(post => {
+    const matchCategory = (category === '전체' || post.category === category);
+    let matchKeyword = false;
+
+    if (target === '제목') matchKeyword = post.title.toLowerCase().includes(keyword);
+    else if (target === '내용') matchKeyword = post.content.toLowerCase().includes(keyword);
+    else if (target === '작성자') matchKeyword = post.author.toLowerCase().includes(keyword);
+    else {
+      // '전체' 검색 시 제목, 내용, 작성자 모두 포함
+      matchKeyword = post.title.toLowerCase().includes(keyword) || 
+                     post.content.toLowerCase().includes(keyword) || 
+                     post.author.toLowerCase().includes(keyword);
+    }
+
+    return matchCategory && matchKeyword;
+  });
+
+  // 3. UI 업데이트
+  if (results.length > 0) {
+    boardList.innerHTML = results.map((post, index) => `
+      <li class="board-item" style="display: flex; align-items: center; padding: 20px 10px; border-bottom: 1px solid #eee;">
+        <div class="item-main" style="flex: 1;">
+          <div style="margin-bottom: 10px;">
+            <a href="${post.url}" style="text-decoration: none; color: #333; font-size: 1.1em;">
+              <span style="color: #666; margin-right: 5px;">[${post.category}]</span>
+              <span style="font-weight: 500;">${post.title}</span>
+            </a>
+          </div>
+          <div class="item-meta" style="font-size: 0.9em; color: #888; display: flex; gap: 15px;">
+            <span>No.${results.length - index}</span>
+            <span>${post.author}</span>
+            <span>${post.date}</span>
+          </div>
+        </div>
+      </li>
+    `).join('');
+    if (pagination) pagination.style.display = 'none'; // 검색 시 페이지네이션 숨김
+  } else {
+    boardList.innerHTML = '<li style="text-align: center; padding: 80px 0; color: #999;">검색 결과가 없습니다.</li>';
+    if (pagination) pagination.style.display = 'none';
+  }
+}
+</script>
