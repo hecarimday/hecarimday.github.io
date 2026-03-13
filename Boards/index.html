@@ -1,7 +1,7 @@
 ---
 layout: default
 title: notice
-permalink: /Boards/index/
+permalink: /Boards/
 ---
 
 <div class="post jg">
@@ -57,22 +57,18 @@ permalink: /Boards/index/
   </ul>
 
   {% if paginator.total_pages > 1 %}
-  <div class="pagination" style="text-align: center; margin-top: 40px; display: flex; justify-content: center; gap: 10px; align-items: center;">
+  <div class="pagination" style="text-align: center; margin-top: 40px;">
     
     {% if paginator.previous_page %}
-      {% if paginator.previous_page == 1 %}
-        <a href="{{ '/Boards/notice/' | relative_url }}" style="padding: 5px 15px; border: 1px solid #ddd; text-decoration: none; color: #666; border-radius: 4px;">이전</a>
-      {% else %}
-        <a href="{{ paginator.previous_page_path | relative_url }}" style="padding: 5px 15px; border: 1px solid #ddd; text-decoration: none; color: #666; border-radius: 4px;">이전</a>
-      {% endif %}
+      <a href="{{ paginator.previous_page_path | replace: 'index.html', '' | relative_url }}" style="padding: 5px 10px; border: 1px solid #ddd; text-decoration: none; color: #666;">이전</a>
     {% endif %}
 
-    <span style="margin: 0 15px; color: #333; font-weight: bold; font-size: 1.1em;">
+    <span style="margin: 0 15px; color: #333; font-weight: bold;">
       {{ paginator.page }} / {{ paginator.total_pages }}
     </span>
 
     {% if paginator.next_page %}
-      <a href="{{ paginator.next_page_path | relative_url }}" style="padding: 5px 15px; border: 1px solid #ddd; text-decoration: none; color: #666; border-radius: 4px;">다음</a>
+      <a href="{{ paginator.next_page_path | relative_url }}" style="padding: 5px 10px; border: 1px solid #ddd; text-decoration: none; color: #666;">다음</a>
     {% endif %}
   </div>
   {% endif %}

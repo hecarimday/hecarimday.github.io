@@ -12,7 +12,7 @@ plugins:
 
 # [수정] v2 방식이 아닌 v1 방식으로 설정
 paginate: 10
-paginate_path: "/Boards/index/page:num/"
+paginate_path: "/Boards/page:num/"
 
 navigation:
   - title: Home
