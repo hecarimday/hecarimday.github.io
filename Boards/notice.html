@@ -24,7 +24,7 @@ permalink: /Boards/notice/
   
   <ul class="post-list" style="list-style: none; padding: 0; margin: 0;">
     {% assign posts_to_show = paginator.posts | default: site.posts %}
-    {% for post in posts_to_show %}
+    {% for post in paginator.posts %}
     <li class="board-item" style="display: flex; align-items: center; padding: 20px 10px; border-bottom: 1px solid #eee; position: relative;">
       
       <div class="item-main" style="flex: 1;">
