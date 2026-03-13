@@ -3,42 +3,35 @@ layout: default
 ---
 
 <style>
-  /* 본문과 확실히 구분되는 첨부파일 박스 */
-  .attachment-box {
-    background-color: #f8f9fa;
-    border: 1px solid #eee;
-    border-radius: 6px;
-    padding: 15px 20px;
-    margin: 25px 0;
+  /* 첨부파일 섹션 전체 (박스 제거, 위아래 선으로 구분) */
+  .attachment-section {
+    margin: 30px 0;
+    border-top: 1px solid #333; /* 상단 굵은 구분선 */
   }
 
   .attachment-label {
+    padding: 15px 10px 5px;
     font-size: 0.85rem;
     font-weight: bold;
-    color: #666;
-    margin-bottom: 12px;
+    color: #888;
   }
 
-  /* 각 첨부파일 칸 (구분선 포함) */
+  /* 각 파일 칸 (가로줄로 나눔) */
   .attachment-item {
-    padding: 8px 0;
-    border-bottom: 1px dotted #ddd;
+    padding: 12px 10px;
+    border-bottom: 1px solid #eee; /* 칸 사이의 가로줄 */
     display: flex;
     align-items: center;
-  }
-
-  /* 마지막 칸은 구분선 제거 */
-  .attachment-item:last-child {
-    border-bottom: none;
   }
 
   .attachment-link {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     text-decoration: none;
-    color: #333;
+    color: #444;
     font-size: 0.95rem;
+    transition: 0.2s;
   }
 
   .attachment-link:hover span {
@@ -46,8 +39,8 @@ layout: default
     text-decoration: underline;
   }
 
-  .download-tag {
-    font-size: 0.75rem;
+  .download-text {
+    font-size: 0.8rem;
     color: #004594;
     font-weight: bold;
     opacity: 0.6;
@@ -76,11 +69,11 @@ layout: default
   <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
 
   {% if page.attachments %}
-  <div class="attachment-box">
+  <div class="attachment-section">
     <div class="attachment-label">📎 첨부파일</div>
     
     {% for file in page.attachments %}
-      {% comment %} 1. 확장자 추출 로직 (에디터가 안 보는 루프 안쪽) {% endcomment %}
+      {% comment %} 에러 방지를 위해 루프 안에서 변수 할당 {% endcomment %}
       {% assign file_ext = file.path | split: '.' | last | downcase %}
       {% if file_ext == "pdf" %}{% assign icon = "pdf-2" %}
       {% elsif file_ext == "doc" or file_ext == "docx" %}{% assign icon = "microsoft-word-2019" %}
@@ -90,9 +83,9 @@ layout: default
 
       <div class="attachment-item">
         <a href="{{ file.path | relative_url }}" download="{{ file.name }}" class="attachment-link">
-          <img src="https://img.icons8.com/color/48/{{ icon }}.png" style="width: 18px; height: 18px;">
+          <img src="https://img.icons8.com/color/48/{{ icon }}.png" style="width: 18px; height: 18px; flex-shrink: 0;">
           <span style="font-weight: 500;">{{ file.name }}</span>
-          <span class="download-tag">[DOWNLOAD]</span>
+          <span class="download-text">[DOWNLOAD]</span>
         </a>
       </div>
     {% endfor %}
