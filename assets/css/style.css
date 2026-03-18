@@ -1005,6 +1005,10 @@ dd {
     line-height: 1.8;
     color: #333;
     word-break: keep-all;
+
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100%; /* 너비를 부모 박스에 꽉 채움 */
 }
 
 /* 마크다운의 # 제목 (h1) */
