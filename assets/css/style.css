@@ -1274,7 +1274,7 @@ dd {
     .post ol,
     .post p,
     .post ul {
-        width: 100%;
+        width: 75%;
         float: none;
         margin: 0 auto 2rem
     }
