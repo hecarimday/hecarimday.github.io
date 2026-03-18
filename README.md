@@ -15,10 +15,24 @@ Boards는 현재 학교 게시판처럼 보이게 하는데는 성공함
 2. 교수님 : 
 
 연구실 홈페이지 예시(타 연구실)
-1. 조재민 교수님 연구실: https://idclab.skku.edu/
-딱 필요한 것만 넣고 무채색만 넣어서 깔끔한 느낌, 
+1. 이종욱 교수님 연구실: https://dial.skku.edu/home
+딱 줄일거 줄이고 깔끔하게, 그리고 여기처럼 보통 메뉴는 오른쪽 위로 다 올리는 추세인듯
 
 2. 정재훈 교수님 연구실: http://iotlab.skku.edu/index.php
 논문 형식의 연구실, member에서 멤버별 개별 페이지를 만들어서 설명을 추가해 놓아서 페이지 길이가 짧음
 
-3.
+3. 구형준 교수님 연구실: https://secai.skku.edu/
+자기 세미나에서 발표한 논문과 발표 PPT 올려놓음
+
+4. 김재광 교수님 연구실: https://sites.google.com/view/skku-milab
+세미나와 멤버등의 내용을 notion에다가 박아놓음
+
+5. 서의성 교수님 연구실: https://csl.skku.edu/home
+메뉴칸을 오른쪽으로 옮김. 색감도 비슷함
+
+6. 아에스아부하메드타메르 교수님 연구실: https://infolab-skku.github.io/
+publication에 검색기능 넣어놧네
+
+7. 우홍욱 교수님 연구실: https://csiagentgroup.com/
+이야 뭘 이리 잘만들엇냐
+
