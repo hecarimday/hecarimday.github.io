@@ -4,7 +4,7 @@ title:  "테스트용 파일"
 date:   2026-03-11
 description: 서버 테스트.
 author: "박진석"
-category: notice
+category: 공지
 ---
 
 통신보안 지원2중대 운전병 일병 박진석입니다
