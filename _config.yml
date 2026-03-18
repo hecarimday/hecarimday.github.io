@@ -29,8 +29,8 @@ navigation:
     url: /Demos/Natural_Language_Processing/
   - title: Boards
     url: /Boards/
-  - title: Links
-    url: /Boards/link/
+#  - title: Links
+#    url: /Boards/link/
 
 social:
   github: "https://github.com/NLPlab-skku"
