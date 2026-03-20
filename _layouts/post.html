@@ -6,7 +6,8 @@ layout: default
   /* 첨부파일 섹션 전체 (박스 제거, 위아래 선으로 구분) */
   .attachment-section {
     margin: 30px 0;
-    border-top: 1px solid #333; /* 상단 굵은 구분선 */
+    border-top: 1px solid #666; /* 상단 굵은 구분선 */
+    border-bottom: 1px solid #666;;
   }
 
   .attachment-label {
@@ -99,7 +100,6 @@ layout: default
         </a>
       </div>
     {% endfor %}
-    <hr style="border: 0; border-top: 1px solid #333; margin: 0;">
   </div>
   {% endif %}
 
@@ -134,23 +134,27 @@ layout: default
   <div class="board-footer">
     <div class="nav-list">
       {% if page.previous %}
-      <a href="{{ page.previous.url | prepend: site.baseurl }}" class="nav-item" style="border-top: 1px solid #333;">
+      <a href="{{ page.previous.url | prepend: site.baseurl }}" class="nav-item" style="border-top: 1px solid #666;">
         <span class="nav-label">▲ 이전글</span>
         <span class="nav-title">{{ page.previous.title }}</span>
       </a>
+      {% else %}
+      <hr style="border: 0; border-top: 1px solid #666; margin: 0;">
       {% endif %}
 
       {% if page.next %}
-      <a href="{{ page.next.url | prepend: site.baseurl }}" class="nav-item" style="border-bottom: 1px solid #333;">
+      <a href="{{ page.next.url | prepend: site.baseurl }}" class="nav-item" style="border-bottom: 1px solid #666;">
         <span class="nav-label">▼ 다음글</span>
         <span class="nav-title">{{ page.next.title }}</span>
       </a>
+      {% else %}
+      <hr style="border: 0; border-top: 1px solid #666; margin: 0;">
       {% endif %}
     </div>
 
     <div class="footer-btns">
       <div class="left-btn">
-        <a href="{{ '/Boards/notice/' | prepend: site.baseurl }}" class="btn-base">≡ 목록</a>
+        <a href="{{ '/Boards/index/' | prepend: site.baseurl }}" class="btn-base">≡ 목록</a>
       </div>
       <!--<div class="right-btns">
         <a href="https://github.com/{{ site.github_username }}/{{ site.github_repo }}/edit/main/{{ page.path }}" target="_blank" class="btn-base btn-dark">수정</a>
