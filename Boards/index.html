@@ -29,7 +29,7 @@ title: notice
 <div class="skku-board">
   <div class="board-header-line" style="border-top: 2px solid #333;"></div>
   
-  <ul class="post-list" style="list-style: none; padding: 0; margin: 0; border-top: 2px solid #333;">
+  <ul class="post-list" style="list-style: none; padding: 0; margin: 0;">
   {% for post in paginator.posts %}
   <li class="board-item" style="display: flex; align-items: center; padding: 20px 10px; border-bottom: 1px solid #eee; position: relative;">
     
@@ -60,6 +60,7 @@ title: notice
       {% endif %}
     </div>
     </li>
+    <div class="board-header-line" style="border-top: 2px solid #333;"></div>
     {% else %}
     <li style="text-align: center; padding: 80px 0; color: #999; border-bottom: 1px solid #eee;">등록된 게시물이 없습니다.</li>
     {% endfor %}
