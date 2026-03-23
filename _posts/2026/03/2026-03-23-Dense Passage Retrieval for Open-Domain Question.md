@@ -106,9 +106,7 @@ Negative 샘플링 방법을 고려함.
 
 1) Random: 코퍼스에서 무작위 추출
 
-2) BM25 (Hard Negative): 질문의 토큰은 많이 포함하고 있지만, 정답은 포함하지
-
-    않는 Passage
+2) BM25 (Hard Negative): 질문의 토큰은 많이 포함하고 있지만, 정답은 포함하지 않는 Passage
 
 3) Gold: 다른 질문과 짝지어진 Positive Passage들
 
