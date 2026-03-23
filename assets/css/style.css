@@ -1046,6 +1046,10 @@ dd {
 
 }
 
+.post-content ul {
+    width: 100%;
+}
+
 .footer {
     text-align: center;
     padding: 2rem 0;
