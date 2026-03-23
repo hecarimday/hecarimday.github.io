@@ -1050,6 +1050,11 @@ dd {
     width: 100% !important;
 }
 
+.post-content p {
+    width: 100% !important;
+}
+
+
 .footer {
     text-align: center;
     padding: 2rem 0;
