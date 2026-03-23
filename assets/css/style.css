@@ -1047,7 +1047,7 @@ dd {
 }
 
 .post-content ul {
-    width: 100%;
+    width: 100% !important;
 }
 
 .footer {
